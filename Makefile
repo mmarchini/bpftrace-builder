@@ -3,13 +3,14 @@ IMAGE_TAG = bpftrace-builder:${LLVM_VERSION}
 LLVM_5 := 5.0
 LLVM_6 := 6.0
 LLVM_7 := 7
+LLVM_8 := 8
 
 DOCKER_RUN_FLAGS := -it --rm --privileged
-DOCKER_VOLUMES := -v $(BPFTRACE_PATH):/bpftrace -v /sys/kernel/debug:/sys/kernel/debug:rw
+DOCKER_VOLUMES := -v $(BPFTRACE_PATH):/bpftrace -v /sys/kernel/debug:/sys/kernel/debug:rw -v /lib/modules:/lib/modules:ro -v /usr/src:/usr/src:ro
 DOCKER_RUN := docker run $(DOCKER_RUN_FLAGS) $(DOCKER_VOLUMES)
 
 .PHONY: all
-all: build-llvm-5 build-llvm-6 build-llvm-7
+all: build-llvm-5 build-llvm-6 build-llvm-7 build-llvm-8
 
 .PHONY: build
 build: Dockerfile

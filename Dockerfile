@@ -12,7 +12,9 @@ deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-5.0 main\n\
 deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main\n\
 deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main\n\
 deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-7 main\n\
-deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-7 main\n' && \
+deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-7 main\n\
+deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main\n\
+deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main\n' && \
     echo $llvmRepository >> /etc/apt/sources.list && \
     curl -L https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4052245BD4284CDD && \
