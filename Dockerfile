@@ -12,9 +12,7 @@ deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-$llvmVersion main\n" &
     echo $llvmRepository >> /etc/apt/sources.list && \
     curl -L https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4052245BD4284CDD && \
-    echo "deb https://repo.iovisor.org/apt/bionic bionic main" | tee /etc/apt/sources.list.d/iovisor.list
-
-RUN apt-get update && apt-get install -y \
+    echo "deb https://repo.iovisor.org/apt/bionic bionic main" | tee /etc/apt/sources.list.d/iovisor.list && apt-get update && apt-get install -y \
       bison \
       cmake \
       flex \
@@ -23,6 +21,8 @@ RUN apt-get update && apt-get install -y \
       libelf-dev \
       zlib1g-dev \
       libbcc \
+      python3 \
+      systemtap-sdt-dev \
       clang-${llvmVersion} \
       libclang-${llvmVersion}-dev \
       libclang-common-${llvmVersion}-dev \
@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y \
       llvm-${llvmVersion} \
       llvm-${llvmVersion}-dev \
       llvm-${llvmVersion}-runtime \
-      libllvm${llvmVersion}
+      libllvm${llvmVersion} && \
+      rm -rf /var/lib/apt/lists/*
 
 WORKDIR /bpftrace/build-llvm$llvm_version

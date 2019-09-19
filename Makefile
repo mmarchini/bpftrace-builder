@@ -6,7 +6,7 @@ LLVM_7 := 7
 LLVM_8 := 8
 
 DOCKER_RUN_FLAGS := -it --rm --privileged
-DOCKER_VOLUMES := -v $(BPFTRACE_PATH):/bpftrace -v /sys/kernel/debug:/sys/kernel/debug:rw -v /lib/modules:/lib/modules:ro -v /usr/src:/usr/src:ro
+DOCKER_VOLUMES := -v $(BPFTRACE_PATH):/bpftrace -v /sys/kernel/debug:/sys/kernel/debug:rw -v /lib/modules:/lib/modules:ro -v /usr/src:/usr/src:ro -v $(BPFTRACE_PATH)/bash_history-$(LLVM_VERSION):/root/.bash_history
 DOCKER_RUN := docker run $(DOCKER_RUN_FLAGS) $(DOCKER_VOLUMES)
 
 .PHONY: all
@@ -37,4 +37,5 @@ run-%:
 ifndef BPFTRACE_PATH
 	$(error BPFTRACE_PATH is not set)
 endif
+	@touch $(BPFTRACE_PATH)/bash_history-$(LLVM_$*)
 	@$(MAKE) -s run LLVM_VERSION=$(LLVM_$*)
